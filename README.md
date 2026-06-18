@@ -3,49 +3,30 @@ Prompt Engineering [Notes](https://docs.google.com/document/d/1b7tVvgZukmT3pW0bj
 
 # Prompt components
 
-## Role
-Ex:
-Act as a science communicator writing for a homeowner's blog
+- Provide correct role description and audience.
+- Provide clear task description. Be specific and add context.
+- Provide context key points to include.
+- Provide constraints and instructions for output formatting (sometimes to avoid unwanted conversational filler).
 
 Ex:
-Prompt: You are 'SupportBot,' a friendly and helpful AI assistant for the e-commerce brand 'Innovate Forward.' Your primary goal is to resolve customer issues by providing accurate information from the company's official knowledge base. You must maintain a polite and professional tone at all times.
-
-## Instruction
-
-Your task is to write a short, engaging paragraph explaining the main benefits of installing solar panels for a homeowner
-
-## Context
---- Key Points to Include ---
-
-- Reduces monthly electricity bills.
-- Can increase the home's market value.
-- Positive environmental impact by reducing the family's carbon footprint.
-
---- End Key Points ---
-
-##Output format
-
 Write in an optimistic and accessible tone. Avoid technical jargon. The paragraph should be no more than 100 words.
 
-## Example
+Ex:
 ```
 Prompt: Act as a science communicator writing for a homeowner's blog. Your task is to write a short, engaging paragraph explaining the main benefits of installing solar panels.
 
 Use the following key points in your response:
 
-Reduces monthly electricity bills.
-Can increase the home's market value.
-Positive environmental impact by reducing the family's carbon footprint.
+- Reduces monthly electricity bills.
+- Can increase the home's market value.
+- Positive environmental impact by reducing the family's carbon footprint.
 
 Write in an optimistic and accessible tone. Avoid technical jargon. The paragraph should be no more than 100 words.
 ```
 
-## Give clear instruction
+Ex: Proper role description setting right tone and style and audience:
 
-- Be specific and add context
-- Assign an audience
-- Use roles to imply a format
-- Specifiy output format clearly to avoid unwanted conversational filler
+Prompt: You are 'SupportBot,' a friendly and helpful AI assistant for the e-commerce brand 'Innovate Forward.' Your primary goal is to resolve customer issues by providing accurate information from the company's official knowledge base. You must maintain a polite and professional tone at all times.
 
 Here we specified measurable success criteria for prompt:
 ```
@@ -78,8 +59,6 @@ The sentiment classification must be a single, clean word with no conversational
 
 The draft response to the customer must have an empathetic and helpful tone.
 ```
-
-## Give step by step instructions
 
 Ex: Multi step prompt:
 ```
@@ -122,7 +101,6 @@ I'm so sorry to hear that your order arrived damaged. According to our policy, y
 
 Ex: Here we specify exact output requirement making it more reliable because the model can identify each part of the task
 ```
-
 Prompt: ### INSTRUCTION ###
 
 Extract the renewal date and the notice period from the legal clause provided below. Provide the output in JSON format.
@@ -152,13 +130,9 @@ Ex: More detailed instructions:
 
 You are an expert AI code reviewer specializing in Python. Your purpose is to help developers improve their code quality.
 
-
-
 ### YOUR TASK ###
 
 Review the Python code provided by the user and identify areas for improvement.
-
-
 
 ### REVIEW CRITERIA ###
 
@@ -170,16 +144,10 @@ You must evaluate the code based on the following three criteria:
 
 3.  **Performance:** Suggest any opportunities for performance optimization.
 
-
-
 ### OUTPUT FORMAT ###
-
 Provide your feedback as a bulleted list, with a separate bullet for each issue you find.
 
-
-
 ### ROLE: USER
-
 Please review the following Python function:
 
 '''python
@@ -261,10 +229,7 @@ Rule: If any of these details are missing or ambiguous in the user's request, do
 
 Ex:
 ```
-
 System prompt: You are "Starlight Storyteller," a friendly AI that creates wonderful bedtime stories for children aged 3-7.
-
-
 
 Your primary rules are:
 
@@ -360,8 +325,6 @@ Prompt:
 
 You are a highly accurate AI Sentiment Analyst. Your task is to analyze customer feedback and classify it as 'Positive', 'Negative', or 'Neutral'. You must provide your analysis in a structured XML format.
 
-
-
 ### INSTRUCTION ###
 
 For each piece of feedback, provide an XML output with a parent node named `<feedback>`. This node must contain two child nodes:
@@ -369,8 +332,6 @@ For each piece of feedback, provide an XML output with a parent node named `<fee
 1.  `<sentiment>`: This must contain one of three exact values: 'Positive', 'Negative', or 'Neutral'.
 
 2.  `<justification>`: This must contain a single sentence explaining the reason for your classification.
-
-
 
 ---
 
@@ -417,7 +378,7 @@ I love the new dark mode feature, it's so much easier on my eyes!
 # Instruction design
 
 - Tone: Formal, empathetic, witty, urgent, optimistic, professional, cautionary, encouraging.
-- Style: Examples: Academic, journalistic, technical, narrative, minimalist, persuasive, poetic.
+- Style: Academic, journalistic, technical, narrative, minimalist, persuasive, poetic.
 - Persona: product manager, sre etc.
 
 Ex:
@@ -427,5 +388,9 @@ Prompt: Explain the benefits of regular exercise in a formal, academic style. Th
 
 # Params
 
-Temperature and top_p, are our tools for influencing this selection process.
-
+temperature for randomnness (0-2 range, small means more accurate, large means diversity)
+top_p where large means more creative word choices - i.e. if we set it to 0.9 means consider all best choices until cumulative probability > 0.9
+max_tokens limits response
+reasoning_effort to manage the depth of problem-solving or verbosity to influence the chattiness of the final answer
+reasoning_effort to manage the depth of problem-solving
+verbosity to influence the chattiness of the final answer
